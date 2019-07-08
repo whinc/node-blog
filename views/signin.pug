@@ -1,0 +1,15 @@
+extends ./templates/layout.pug
+
+block content
+  form(action='/signin' method='POST')
+    div
+      label(for='username') 用户名:
+      input(type='text' name='username' id='username' placeholder='请输入用户名')
+    div
+      label(for='password') 密码:
+      input(type='text' name='password' id='password' placeholder='请输入密码')
+    div
+      input(type='submit' value='登录')
+  
+  div
+    a(href='/signup') 没有账号，去注册

@@ -1,6 +1,6 @@
 module.exports = {
   async index (ctx) {
-    await ctx.render('index', {
+    await ctx.render('home', {
       title: 'node-blog',
     })
   }

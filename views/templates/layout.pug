@@ -1,0 +1,41 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title #{title}
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css")
+    script(src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" defer)
+    script
+      include layout.js
+
+  body
+    if ctx.flash
+      if ctx.flash.success
+        .notification.is-success= ctx.flash.success
+          button.delete
+      if ctx.flash.warning
+        .notification.is-warning= ctx.flash.warning
+          button.delete
+
+    .navbar
+      .navbar-brand
+        .navbar-item
+          span node.js 博客系统
+      .navbar-end
+        .navbar-item
+          - const user = ctx.session.user
+          - const isLogin = !!user
+          if isLogin
+            .columns
+              .column(style='margin: auto')= user.username
+              .column
+                a.button.is-danger(href="/signout") 退出
+          else
+            .buttons
+              if !ctx.path.startsWith('/signin')
+                a.button.is-primary(href="/signin") 登录
+              if !ctx.path.startsWith('/signup')
+                a.button(href="/signup") 注册
+
+    block content
